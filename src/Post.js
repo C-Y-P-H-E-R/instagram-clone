@@ -2,7 +2,7 @@ import React from 'react'
 import './Post.css'
 import { Avatar, Container } from '@material-ui/core';
 
-function Post({ prp }) {
+function Post({ id , prp }) {
     return (
         <Container className="post" maxWidth="sm">
             {/* header -> avatar + username */}
@@ -22,3 +22,5 @@ function Post({ prp }) {
 }
 
 export default Post
+
+ 

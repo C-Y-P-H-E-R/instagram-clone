@@ -11,5 +11,10 @@
 
 .App {
   background-color: #fafafa;
-  height: 100vh;
+  height: fit-content;
+}
+
+.app__signup {
+  display: flex;
+  flex-direction: column;
 }
