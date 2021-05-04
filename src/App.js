@@ -4,6 +4,8 @@ import { useState , useEffect } from 'react';
 // import firebase from 'firebase'
 import { auth, db } from './Firebase';
 import { Button, Input, makeStyles, Modal } from '@material-ui/core';
+import ImageUpload from './ImageUpload';
+import InstagramEmbed from 'react-instagram-embed'
 
 function getModalStyle() {
   const top = 50;
@@ -44,7 +46,7 @@ function App() {
     const unsubscribe = auth.onAuthStateChanged((authUser) => {
       if(authUser) {
         //if the user has logged in
-        console.log(authUser)
+        //console.log(authUser)
         setUser(authUser);
       } else {
         //if the user has logged out
@@ -59,7 +61,7 @@ function App() {
   }, [user , username])
 
   useEffect(() => {
-   db.collection('posts').onSnapshot(snapshot => {
+   db.collection('posts').orderBy("timestamp","desc").onSnapshot(snapshot => {
     setPosts(snapshot.docs.map(doc => ({
       id: doc.id,
       post: doc.data()
@@ -94,6 +96,7 @@ function App() {
 
   return (
     <div className="App">
+
      <Modal
         open={open}
         onClose={() => setOpen(false)}
@@ -102,7 +105,7 @@ function App() {
         <form className="app__signup">
         <center>
             <img alt="Instagram" src="https://www.instagram.com/static/images/web/mobile_nav_type_logo.png/735145cfe0a4.png" />
-            </center>
+        </center>
 
             <Input 
               type="text"
@@ -158,10 +161,8 @@ function App() {
       
       {/* header */}
       <div className="app__header">
-        <img alt="Instagram" src="https://www.instagram.com/static/images/web/mobile_nav_type_logo.png/735145cfe0a4.png" />
-      </div>
-
-      {
+        <img alt="Instagram" className="app__header__image" src="https://www.instagram.com/static/images/web/mobile_nav_type_logo.png/735145cfe0a4.png" />
+        {
         user ? (
           <Button onClick={() => auth.signOut()}>LogOut</Button>
          ) : (
@@ -171,20 +172,50 @@ function App() {
            </div> 
          )
       }
+      
+      </div>
       {/* <h1>Hello React</h1> */}
       {/* posts */}
       
+      <div className="app__posts">
       {
         posts.map(post => {
           return  <Post key={post.id} prp={post.post} />;
         })
       }
-      
+      </div>
+
+      <InstagramEmbed
+          url='https://www.instagram.com/p/B_uf9dmAGPw/'
+          maxWidth={320}
+          clientAccessToken='123|456'
+          hideCaption={false}
+          containerTagName='div'
+          protocol=''
+          injectScript
+          onLoading={() => {}}
+          onSuccess={() => {}}
+          onAfterRender={() => {}}
+          onFailure={() => {}}
+      />
+
       {/* posts */}
+
+      {/* uploadcomponent */}
+
+      {
+      user?.displayName ? (
+        <ImageUpload username={user.displayName}/>
+      ) : (
+        <h3 style={{
+          padding : "45px",
+          borderTop: "1px solid lightGray"
+          }}><center>LOGIN TO UPLOAD</center></h3>
+      )
+    }
     </div>
   );
 }
 
 export default App;
-
 

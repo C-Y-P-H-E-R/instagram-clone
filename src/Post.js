@@ -1,10 +1,10 @@
 import React from 'react'
 import './Post.css'
-import { Avatar, Container } from '@material-ui/core';
+import { Avatar } from '@material-ui/core';
 
 function Post({ id , prp }) {
     return (
-        <Container className="post" maxWidth="sm">
+        <div className="post" >
             {/* header -> avatar + username */}
             <div className="post__header">    
                 <Avatar className="post__avatar"  alt="Kushagra" src="download.jpg" />
@@ -17,7 +17,7 @@ function Post({ id , prp }) {
             {/* username + caption */}
             <h4 className="post__text"><strong>{prp.username}</strong>: {prp.caption}</h4>
             
-        </Container>
+        </div>
     )
 }
 
