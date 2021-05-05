@@ -28,3 +28,37 @@
 .post__avatar {
     margin-right: 10px;
 }
+
+.post__comment {
+    display: flex;
+    padding: 20px;
+    /* margin-top: 10px; */
+}
+
+.post__input {
+    flex: 1;
+    padding: 10px;
+    border: none;
+    border-bottom: 1px solid lightGray;
+    
+}
+
+.post__button:hover {
+    background-color: #E1306C;
+    color: white;
+} 
+
+.post__button {
+    flex: 0;
+    border: 1px solid lightGray;
+    background-color: white;
+    color: #6082a3;
+    padding: 10px;
+    border: none;
+    border-left: 1px solid lightGray;
+    cursor: pointer;
+}
+
+.post__comments {
+    padding: 20px;
+}

@@ -5,7 +5,7 @@ import { useState , useEffect } from 'react';
 import { auth, db } from './Firebase';
 import { Button, Input, makeStyles, Modal } from '@material-ui/core';
 import ImageUpload from './ImageUpload';
-import InstagramEmbed from 'react-instagram-embed'
+// import InstagramEmbed from 'react-instagram-embed'
 
 function getModalStyle() {
   const top = 50;
@@ -83,7 +83,7 @@ function App() {
   const signUp = (event) => {
     event.preventDefault();
     auth.createUserWithEmailAndPassword(email,password).then((authUser) => {
-      return authUser.user.updateProfile({
+      authUser.user.updateProfile({
         displayName: username
       })
     }).catch((error) => alert(error.message))
@@ -180,15 +180,15 @@ function App() {
       <div className="app__posts">
       {
         posts.map(post => {
-          return  <Post key={post.id} prp={post.post} />;
+          return  <Post username = {user} key={post.id} postid={post.id} prp={post.post} />;
         })
       }
       </div>
-
+{/* 
       <InstagramEmbed
           url='https://www.instagram.com/p/B_uf9dmAGPw/'
           maxWidth={320}
-          clientAccessToken='123|456'
+          clientAccessToken='487151052529565 | 821202121a36db42a27c8d04a54f5c6b'
           hideCaption={false}
           containerTagName='div'
           protocol=''
@@ -197,7 +197,7 @@ function App() {
           onSuccess={() => {}}
           onAfterRender={() => {}}
           onFailure={() => {}}
-      />
+      /> */}
 
       {/* posts */}
 
